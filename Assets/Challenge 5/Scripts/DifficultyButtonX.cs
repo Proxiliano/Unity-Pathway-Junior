@@ -7,7 +7,21 @@ public class DifficultyButtonX : MonoBehaviour
 {
     private Button button;
     private GameManagerX gameManagerX;
-    public int difficulty;
+    public float difficulty;
+    // Check which button is clicked and set difficulty accordingly
+    public bool easyButtonClicked()
+    {
+        return button.gameObject.name == "Easy Button";
+    }
+    public bool mediumButtonClicked()
+    {
+        return button.gameObject.name == "Medium Button";
+    }
+    public bool hardButtonClicked()
+    {
+        return button.gameObject.name == "Hard Button";
+    }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +37,19 @@ public class DifficultyButtonX : MonoBehaviour
     void SetDifficulty()
     {
         Debug.Log(button.gameObject.name + " was clicked");
+        if (easyButtonClicked())
+        {
+             difficulty = 0.5f;
+        }
+        else if (mediumButtonClicked())
+        {
+            difficulty = 0.75f;
+        }
+        else if (hardButtonClicked())
+        {
+            difficulty = 1f;
+        } 
+        gameManagerX.spawnRate /= difficulty;
         gameManagerX.StartGame();
     }
 
